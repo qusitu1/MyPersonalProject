@@ -11,13 +11,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Physics for the Player
+        
         playerRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Horizontal movement for player
 
         if (transform.position.x < -xRange)
         {
@@ -32,4 +34,6 @@ public class PlayerController : MonoBehaviour
 
         playerRb.AddForce(Vector3.left * speed * horizontalInput);
     }
+
 }
+

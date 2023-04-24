@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5;
-    private Rigidbody playerRb;
-    private float horizontalInput;
-    private float forwardInput;
+    public Rigidbody rb;
+
+    private float forwardForce = 50f;
+    public float sidewaysForce = 50f;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Physics for the Player
         
-        playerRb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float forwardInput = Input.GetAxis("Vertical");
+        rb.AddForce(0, 0, forwardForce * Time.deltaTime);
 
-        playerRb.AddForce(transform.position * speed * forwardInput);
-        playerRb.AddForce(transform.position * speed * horizontalInput);
+        if(Input.GetKey("d"))
+        {
+            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+
+        if(Input.GetKey("a"))
+        {
+            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+
+        if(Input.GetKey("w"))
+        {
+            rb.AddForce(forwardForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+
+        if(Input.GetKey("s"))
+        {
+            rb.AddForce(-forwardForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
 
     
     }

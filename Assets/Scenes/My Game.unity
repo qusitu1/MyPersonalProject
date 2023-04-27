@@ -2684,6 +2684,8 @@ MonoBehaviour:
   speed: 10
   horizontalInput: 0
   verticalInput: 0
+  jumpForce: 15
+  gravityModifier: 2
 --- !u!54 &1627645564
 Rigidbody:
   m_ObjectHideFlags: 0

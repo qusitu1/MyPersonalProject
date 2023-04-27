@@ -2681,11 +2681,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfedc95738064c1abf4af3aef383b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   horizontalInput: 0
   verticalInput: 0
-  jumpForce: 15
-  gravityModifier: 2
+  jumpForce: 20
+  gravityModifier: 5
+  isOnGround: 1
 --- !u!54 &1627645564
 Rigidbody:
   m_ObjectHideFlags: 0

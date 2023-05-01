@@ -9,6 +9,9 @@ public class FollowPlayer : MonoBehaviour
 
     public float movementSpeed = 100f;
     public float rotationSpeed = 200f;
+    public float verticalRotationLimit = 80f;
+
+    public float verticalRotation = 0f;
 
     public bool isMoving = false;
 
@@ -38,9 +41,18 @@ public class FollowPlayer : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         float rotation = Input.GetAxis("Mouse X");
+        float verticalRotationInput = Input.GetAxis("Mouse Y");
 
+        //Rotate camera vertically
+        verticalRotation -= verticalRotationInput * rotationSpeed * Time.deltaTime;
+        verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
+        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+
+        //Move camera horizontally and forward/backward
         transform.Translate(Vector3.right * horizontal * movementSpeed * Time.deltaTime);
         transform.Translate(Vector3.forward * vertical * movementSpeed * Time.deltaTime);
+
+        //Rotate camera horizontally
         transform.Rotate(Vector3.up, rotation * rotationSpeed * Time.deltaTime);
     }
     }

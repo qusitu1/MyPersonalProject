@@ -7,6 +7,11 @@ public class FollowPlayer : MonoBehaviour
     public GameObject player;
     private Vector3 offset = new Vector3(-10, 5, 0);
 
+    public float movementSpeed = 100f;
+    public float rotationSpeed = 200f;
+
+    public bool isMoving = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +22,29 @@ public class FollowPlayer : MonoBehaviour
     void LateUpdate()
     {
         transform.position = player.transform.position + offset;
+
+        //Check for right mouse button input
+        if(Input.GetMouseButtonDown(1))
+        {
+            isMoving = true;
+        }
+        else if(Input.GetMouseButtonUp(1))
+        {
+            isMoving = false;
+        }
+        //Free camera, move camera based on arrows and mouse
+        if (isMoving)
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        float rotation = Input.GetAxis("Mouse X");
+
+        transform.Translate(Vector3.right * horizontal * movementSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * vertical * movementSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, rotation * rotationSpeed * Time.deltaTime);
     }
+    }
+
 }
+
+

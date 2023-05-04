@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 offset = new Vector3(-10, 5, 0);
+    private Vector3 offset = new Vector3(-10, 4, 0);
 
     public float movementSpeed = 100f;
     public float rotationSpeed = 200f;
@@ -44,9 +44,8 @@ public class FollowPlayer : MonoBehaviour
         float verticalRotationInput = Input.GetAxis("Mouse Y");
 
         //Rotate camera vertically
-        verticalRotation -= verticalRotationInput * rotationSpeed * Time.deltaTime;
-        verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
-        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        float verticalMovement = Input.GetAxis("Mouse Y") * movementSpeed * Time.deltaTime;
+        transform.Translate(Vector3.up * verticalMovement, Space.World);
 
         //Move camera horizontally and forward/backward
         transform.Translate(Vector3.right * horizontal * movementSpeed * Time.deltaTime);

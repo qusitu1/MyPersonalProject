@@ -35,7 +35,7 @@ public class FollowPlayer : MonoBehaviour
         {
             isMoving = false;
         }
-        //Free camera, move camera based on arrows and mouse
+        //Free camera, move camera based on mouse
         if (isMoving)
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -43,11 +43,9 @@ public class FollowPlayer : MonoBehaviour
         float rotation = Input.GetAxis("Mouse X");
         float verticalRotationInput = Input.GetAxis("Mouse Y");
 
-        //Rotate camera vertically
-        float verticalMovement = Input.GetAxis("Mouse Y") * movementSpeed * Time.deltaTime;
-        transform.Translate(Vector3.up * verticalMovement, Space.World);
+    
 
-        //Move camera horizontally and forward/backward
+        //Move camera horizontally and forward/backward 
         transform.Translate(Vector3.right * horizontal * movementSpeed * Time.deltaTime);
         transform.Translate(Vector3.forward * vertical * movementSpeed * Time.deltaTime);
 

@@ -1542,13 +1542,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5109b4730f34796adf4a676f8cb5e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fc38ce17628b41f1ae969ceb3f4cebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1627645557}
-  movementSpeed: 100
-  rotationSpeed: 600
-  tiltAngle: 30
+  target: {fileID: 1627645561}
+  distance: 10
+  height: 10
+  sensitivity: 5
+  moveSpeed: 10
   isMoving: 0
 --- !u!1001 &969635220
 PrefabInstance:

@@ -49,22 +49,10 @@ public class FollowPlayer : MonoBehaviour
 
         //Rotate camera horizontally
         transform.Rotate(Vector3.up, rotation * rotationSpeed * Time.deltaTime);
-        float newTiltAngle = transform.rotation.eulerAngles.x - tilt * rotationSpeed * Time.deltaTime;
-        newTiltAngle = Mathf.Clamp(newTiltAngle, -tiltAngle, tiltAngle);
-        transform.rotation = Quaternion.Euler(newTiltAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-    }
-    else
-    {
-        //Set the camera position relative to the player's position
-        Vector3 desiredPosition = player.transform.position + offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * movementSpeed);
-
-        //Rotate the camera to face the player
-        Quaternion desiredRotation = Quaternion.LookRotation(player.transform.position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
-    }
+        
     }
 
+}
 }
 
 

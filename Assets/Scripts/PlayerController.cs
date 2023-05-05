@@ -42,11 +42,20 @@ public class PlayerController : MonoBehaviour
     //Move player based on WASD input
     void MovePlayer()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-        
-        verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+        //Get direction of the camera's forward vector in the xz plane
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+
+        //Get direction of the input
+        Vector3 inputDirection = new Vector3(horizontalInput, 0, verticalInput);
+
+        //Calculate the new direction by rotating the input direction to the camera
+        Quaternion rotation = Quaternion.LookRotation(cameraForward);
+        Vector3 direction = rotation * inputDirection;
+
+        //Move player in the new direction
+        transform.Translate(direction * Time.deltaTime * speed);
     }
 } 
 

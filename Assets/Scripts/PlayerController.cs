@@ -42,29 +42,22 @@ public class PlayerController : MonoBehaviour
     //Move player based on WASD input
     void MovePlayer()
     {
+        //Get direction of the camera's forward vector in the xz plane
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0;
+        cameraForward = cameraForward.normalized;
+
         //Get direction of the input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDirection = new Vector3(horizontalInput, 0, verticalInput);
 
-        //Check if right mouse button is pressed
-        bool isRotating = Input.GetMouseButtonDown(1);
 
-        //Rotate input direction to camera's forward direction if right mouse button is pressed
-        if (isRotating)
-        {
-            //Get direction of the camera's forward vector in the xz plane
-            Vector3 cameraForward = Camera.main.transform.forward;
-            cameraForward.y = 0;
-            cameraForward.Normalize();
-
-            //Calculate the new direction by rotating the input direction to the camera
-            Quaternion rotation = Quaternion.LookRotation(cameraForward);
-            Vector3 direction = rotation * inputDirection;
-        }
+        //Calculate the new direction by rotating the input direction to the camera
+        Vector3 direction = Quaternion.Euler(0f, Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg, 0f) * cameraForward;
+        
 
         //Move player in the new direction
-        transform.Translate(inputDirection * Time.deltaTime * speed);
+        transform.Translate(direction * Time.deltaTime * speed, Space.World);
     }
 } 
 

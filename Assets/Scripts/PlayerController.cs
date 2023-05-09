@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier;
     public bool isOnGround = true;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Keep player in bounds
+        if(transform.position.x < -180)
+        {
+            transform.position = new Vector3(-180, transform.position.y, transform.position.z);
+        }
+        if(transform.position.x > 180)
+        {
+            transform.position = new Vector3(180, transform.position.y, transform.position.z);
+        }
+        
+
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -68,6 +81,8 @@ public class PlayerController : MonoBehaviour
             //Move player in the new direction
             transform.Translate(direction * Time.deltaTime * speed, Space.World); 
         }
+
+        
 
         
     }

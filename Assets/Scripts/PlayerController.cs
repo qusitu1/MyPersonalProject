@@ -29,6 +29,13 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
+
+        //Reset input values if no keys are being pressed
+        if (!Input.anyKey)
+        {
+            horizontalInput = 0f;
+            verticalInput = 0f;
+        }
        
         MovePlayer();
     }
@@ -51,13 +58,18 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-
-        //Calculate the new direction by rotating the input direction to the camera
-        Vector3 direction = Quaternion.Euler(0f, Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg, 0f) * cameraForward;
+        //Only move the player if there is input from the user
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            //Calculate the new direction by rotating the input direction to the camera
+            Vector3 direction = Quaternion.Euler(0f, Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg, 0f) * cameraForward;
         
 
-        //Move player in the new direction
-        transform.Translate(direction * Time.deltaTime * speed, Space.World);
+            //Move player in the new direction
+            transform.Translate(direction * Time.deltaTime * speed, Space.World); 
+        }
+
+        
     }
 } 
 

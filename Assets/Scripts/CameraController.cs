@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public float distance = 5f;
     public float height = 2f;
     public float sensitivity = 0.2f;
-    public float moveSpeed = 100f;
+    public float moveSpeed = 5f;
 
     private float rotateX = 0f;
     private float rotateY = 0f;

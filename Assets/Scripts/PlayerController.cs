@@ -35,6 +35,15 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(180, transform.position.y, transform.position.z);
         }
+
+        if(transform.position.z < -40)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -40);
+        }
+        if(transform.position.z > 40)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 40);
+        }
         
 
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)

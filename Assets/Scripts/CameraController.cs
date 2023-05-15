@@ -16,17 +16,34 @@ public class CameraController : MonoBehaviour
 
     public bool isMoving = false;
 
+    public GameObject player;
+    private GameManager gameManager;
+
     private Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
     {
         offset = new Vector3(0f, height, -distance);
+        offset = transform.position - player.transform.position;
+
+        //Get reference to the GameManager script
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+
+        //Set isMoving to false initially
+        isMoving = false;
     }
+
 
     // Update is called once per frame
     private void LateUpdate()
     {
+        //If game has not started yet, don't move camera or player
+        if (!gameManager.gameStarted)
+        {
+            return;
+        }
+
         //Calculate camera position based on target position and camera offset
         Vector3 targetPosition = target.position + offset;
         transform.position = targetPosition;

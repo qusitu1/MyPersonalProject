@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Button startButton;
     public GameObject titleScreen;
     public bool isGameActive;
+    public bool gameStarted = false;
+
+    public CameraController cameraController;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,10 @@ public class GameManager : MonoBehaviour
     {
         ThelostChildText.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
+        isGameActive = true;
+
+        //Start camera movement
+        cameraController.isMoving = true;
     }
 
 }

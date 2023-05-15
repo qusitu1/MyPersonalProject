@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TitleManager : MonoBehaviour
 {
     public Button startButton;
+    public Button controlsButton;
 
 
     // Start is called before the first frame update
@@ -20,11 +21,15 @@ public class TitleManager : MonoBehaviour
     {
         
     }
-
+    
     public void StartGame()
     {
         SceneManager.LoadScene("My Game");
     }
 
+    public void SwitchToScene()
+    {
+        SceneManager.LoadScene("Controls");
+    }
 
 }

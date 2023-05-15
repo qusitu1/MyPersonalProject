@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier;
     public bool isOnGround = true;
 
-    public GameManager gameManager;
-    public CameraController cameraController;
+    private GameManager gameManager;
+    private CameraController cameraController;
 
 
     // Start is called before the first frame update

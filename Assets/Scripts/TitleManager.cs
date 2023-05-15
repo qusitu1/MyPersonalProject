@@ -9,6 +9,7 @@ public class TitleManager : MonoBehaviour
     public Button startButton;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,10 @@ public class TitleManager : MonoBehaviour
     {
         
     }
-
+    
     public void StartGame()
     {
         SceneManager.LoadScene("My Game");
     }
-
 
 }

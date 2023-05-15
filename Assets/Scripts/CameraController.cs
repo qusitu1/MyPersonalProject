@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
+    public Transform player;
 
     public float distance = 5f;
     public float height = 2f;
@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
 
     public bool isMoving = false;
 
-    public GameObject player;
     private GameManager gameManager;
 
     private Vector3 offset;
@@ -45,8 +44,8 @@ public class CameraController : MonoBehaviour
         }
 
         //Calculate camera position based on target position and camera offset
-        Vector3 targetPosition = target.position + offset;
-        transform.position = targetPosition;
+        Vector3 playerPosition = player.position + offset;
+        transform.position = playerPosition;
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -60,7 +59,7 @@ public class CameraController : MonoBehaviour
         //Only move character if camera is being controlled
         if (isMoving)
         {
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (player.position - transform.position).normalized;
         float yRotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
         rotateX -= Input.GetAxis("Mouse Y") *sensitivity;
@@ -71,7 +70,7 @@ public class CameraController : MonoBehaviour
         Vector3 offsetY = Vector3.up * height;
         offset = rotation * new Vector3(0, offsetY.y, -distance);
 
-        transform.position = target.position + offset + offsetY;
+        transform.position = player.position + offset + offsetY;
         transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
 
         //Get input axes for movement
@@ -85,12 +84,12 @@ public class CameraController : MonoBehaviour
         movementDirection = rotation * movementDirection;
 
         //Move the character in the rotated movement direction
-        target.position += movementDirection * Time.deltaTime * moveSpeed;
+        player.position += movementDirection * Time.deltaTime * moveSpeed;
         }
 
         //Set camera position and rotation
-        transform.position = targetPosition;
-        transform.LookAt(target.position);
+        transform.position = playerPosition;
+        transform.LookAt(player.position);
         
     }
 }

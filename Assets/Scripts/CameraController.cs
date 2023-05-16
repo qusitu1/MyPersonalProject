@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform player;
+    public Transform target;
 
     public float distance = 5f;
     public float height = 2f;
@@ -16,35 +16,24 @@ public class CameraController : MonoBehaviour
 
     public bool isMoving = false;
 
-    private GameManager gameManager;
-
     private Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
     {
         offset = new Vector3(0f, height, -distance);
-        offset = transform.position - player.transform.position;
+        offset = transform.position - target.transform.position;
 
-        //Get reference to the GameManager script
-        gameManager = GameObject.FindObjectOfType<GameManager>();
-
-        //Set isMoving to false initially
-        isMoving = false;
     }
 
 
     // Update is called once per frame
     private void LateUpdate()
     {
-        //If game has not started yet, don't move camera or player
-        if (!gameManager.gameStarted)
-        {
-            return;
-        }
+        
 
         //Calculate camera position based on target position and camera offset
-        Vector3 playerPosition = player.position + offset;
+        Vector3 playerPosition = target.position + offset;
         transform.position = playerPosition;
 
         if (Input.GetMouseButtonDown(1))
@@ -59,7 +48,7 @@ public class CameraController : MonoBehaviour
         //Only move character if camera is being controlled
         if (isMoving)
         {
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (target.position - transform.position).normalized;
         float yRotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
         rotateX -= Input.GetAxis("Mouse Y") *sensitivity;
@@ -70,7 +59,7 @@ public class CameraController : MonoBehaviour
         Vector3 offsetY = Vector3.up * height;
         offset = rotation * new Vector3(0, offsetY.y, -distance);
 
-        transform.position = player.position + offset + offsetY;
+        transform.position = target.position + offset + offsetY;
         transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
 
         //Get input axes for movement
@@ -84,12 +73,12 @@ public class CameraController : MonoBehaviour
         movementDirection = rotation * movementDirection;
 
         //Move the character in the rotated movement direction
-        player.position += movementDirection * Time.deltaTime * moveSpeed;
+        target.position += movementDirection * Time.deltaTime * moveSpeed;
         }
 
         //Set camera position and rotation
         transform.position = playerPosition;
-        transform.LookAt(player.position);
+        transform.LookAt(target.position);
         
     }
 }

@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier;
     public bool isOnGround = true;
 
-    private GameManager gameManager;
-    private CameraController cameraController;
+    
 
 
     // Start is called before the first frame update
@@ -24,16 +23,13 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityModifier;
 
-        gameManager = FindObjectOfType<GameManager>();
-        cameraController = FindObjectOfType<CameraController>();
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.isGameActive)
-
-        {
+        
             //Keep player in bounds
             if(transform.position.x < -180)
             {
@@ -68,7 +64,7 @@ public class PlayerController : MonoBehaviour
             }
        
             MovePlayer();
-        }
+        
     }
 
     //Prevent player from double jumping
@@ -80,8 +76,7 @@ public class PlayerController : MonoBehaviour
     //Move player based on WASD input
     void MovePlayer()
     {
-        if (gameManager.isGameActive)
-        {
+        
             //Get direction of the camera's forward vector in the xz plane
             Vector3 cameraForward = Camera.main.transform.forward;
             cameraForward.y = 0;
@@ -101,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 //Move player in the new direction
                 transform.Translate(direction * Time.deltaTime * speed, Space.World); 
             }
-        }
+        
         
     }
 } 

@@ -2131,7 +2131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc38ce17628b41f1ae969ceb3f4cebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1627645561}
+  target: {fileID: 1627645561}
+  targetTag: Player
   distance: 10
   height: 10
   sensitivity: 5

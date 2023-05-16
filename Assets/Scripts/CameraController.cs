@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target;
+    public string targetTag = "Player";
 
     public float distance = 5f;
     public float height = 2f;
@@ -21,8 +22,18 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = new Vector3(0f, height, -distance);
-        offset = transform.position - target.transform.position;
+        GameObject targetObject = GameObject.FindGameObjectWithTag(targetTag);
+        if (targetObject != null)
+        {
+            target = targetObject.transform;
+            offset = new Vector3(0f, height, -distance);
+            offset = transform.position - target.transform.position;
+        }
+        else
+        {
+            Debug.LogError("No object with tag 'PLayer' found!");
+        }
+        
 
     }
 
@@ -30,6 +41,10 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
+        if (target == null)
+        {
+            return;
+        }
         
 
         //Calculate camera position based on target position and camera offset

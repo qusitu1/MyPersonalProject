@@ -25,7 +25,10 @@ public class CheckSpawnPoint : MonoBehaviour
         {
             //Player has reached the check/spawn point
             Debug.Log("Player reached checkpoint: " + identifier);
+
+            
         }
+
     }
 
     public void SpawnObject()

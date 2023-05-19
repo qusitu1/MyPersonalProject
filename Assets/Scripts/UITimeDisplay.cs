@@ -24,5 +24,10 @@ public class UITimeDisplay : MonoBehaviour
     {
         float currentTime = timeLimitController.currentTime;
         timeText.text = "Time: " + currentTime.ToString("F1");
+
+        if (currentTime <= 0)
+        {
+            currentTime = 0;        
+        }
     }
 }

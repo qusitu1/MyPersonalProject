@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     public bool gameStarted = false;
 
-    private CameraController cameraController;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +33,7 @@ public class GameManager : MonoBehaviour
         startButton.gameObject.SetActive(false);
         isGameActive = true;
 
-        //Start camera movement
-        cameraController.isMoving = true;
+        
     }
 
 }

@@ -21,7 +21,7 @@ public class GameOverCheckpoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //Player reached the game over checkpoint
-            Debug.Log("Game Over! You win!");
+            Debug.Log("Game Over! You are safe.");
         }
     }
 }
